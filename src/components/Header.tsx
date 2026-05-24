@@ -51,7 +51,7 @@ export const Header: React.FC<HeaderProps> = ({
   const menuItems = [
     { label: 'Inicio', id: 'inicio' },
     { label: 'Sobre Mi', id: 'sobre-mi' },
-    { label: 'Habilidades', id: 'habilidades' },
+    { label: 'Herramientas', id: 'habilidades' },
     { label: 'Proyectos', id: 'proyectos' },
     { label: 'Contacto', id: 'contacto' },
   ];

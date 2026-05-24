@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { FolderGit2, ArrowUpRight, X, Sparkles, CloudLightning } from 'lucide-react';
-import projectFastApiImg from '../assets/images/project_fastapi_1779587611753.png';
-import projectAstroImg from '../assets/images/project_astro_1779587627691.png';
-import projectDatabaseImg from '../assets/images/project_database_1779587644917.png';
+import projectFastApiImg from '../assets/images/Vocalb.png';
+import projectAstroImg from '../assets/images/CLASSTRACK.png';
+import projectDatabaseImg from '../assets/images/EDCO.png';
 
 interface ProjectItem {
   id: number;
@@ -22,32 +22,32 @@ export const Proyectos: React.FC = () => {
   const projects: ProjectItem[] = [
     {
       id: 1,
-      title: 'ThunderAPI',
-      subtitle: 'FastAPI Backend de Alta Frecuencia',
-      description: 'API REST robusta de alto rendimiento con arquitectura limpia de dependencias y optimización extrema de consultas asíncronas. Integra cachés de memoria y un sistema de control de cuotas mediante middlewares.',
-      tech: ['FastAPI', 'Python', 'Redis', 'Docker'],
+      title: 'VocabQuest',
+      subtitle: 'Pagina web de Aprendizaje en Ingles',
+      description: 'VocabQuest es una pagina web de aprendizaje de vocabulario inglés estilo Kahoot, diseñada para estudiar vocabulario de B1 que se preparan para el TOEFL. de mi universidad',
+      tech: ['React', 'Vite', 'TypeScript', 'FireBase'],
       imageUrl: projectFastApiImg,
-      repoUrl: 'https://github.com/josue-flores/thunder-api',
+      repoUrl: 'https://github.com/Joss177/-VocabQuest',
       accentColor: 'indigo-500',
     },
     {
       id: 2,
-      title: 'AstroStorm Portal',
-      subtitle: 'Sitio Web Estático Optimizado',
-      description: 'Plataforma web multipágina con carga estática inmediata e indexación SEO premium. Desarrollado con modularización de widgets de islas reactivas para conservar un peso ultraligero y rendimiento perfecto.',
-      tech: ['Astro', 'React', 'Tailwind CSS', 'TypeScript'],
+      title: 'ClassTrack',
+      subtitle: 'Sistema Web Universitario',
+      description: 'Classtrack es una aplicativa web para la Universidad Politécnica de Sinaloa, especificamente para la carrera de TI. Gestión de usuarios (Laboratorista, Docentes). Gestión de camaras de seguridad y de horarios. Gestión de google sheets con asistencias de alumnos. Gestión de procesos administrativos.',
+      tech: ['FastApi','React','Vue','Python',  'Postgresql'],
       imageUrl: projectAstroImg,
-      repoUrl: 'https://github.com/josue-flores/astro-storm-site',
+      repoUrl: 'https://github.com/Joss177/ClassTrack2',
       accentColor: 'purple-500',
     },
     {
       id: 3,
-      title: 'VoltDB Node Console',
-      subtitle: 'Dashboard de Datos Complejos PostgreSQL',
-      description: 'Consola y panel de control administrativo para depuración en vivo de bases de datos relacionales. Permite monitorear el pool de conexiones activas, cuellos de botella e indexaciones inteligentes bajo hilos paralelos.',
-      tech: ['PostgreSQL', 'Node.js', 'Express', 'D3.js'],
+      title: 'EDCO',
+      subtitle: 'Sistema Web Constructura',
+      description: 'EDCO es un sistema web para una constructura. Gestión de usuarios como supervisores, contratistas, encargados, Creación de proyectos, documentos y exportalos en PDF (requisiciones, reportes, estados de cuenta). Subir fotografias y videos de en cada proyecto, y gestión pagos de materiales.',
+      tech: ['CakePHP', 'PHP', 'JS', 'MySQL'],
       imageUrl: projectDatabaseImg,
-      repoUrl: 'https://github.com/josue-flores/voltdb-dashboard',
+      repoUrl: 'x',
       accentColor: 'cyan-500',
     },
   ];
