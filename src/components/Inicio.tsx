@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'motion/react';
-import { Linkedin, Github, FileText, Send, ArrowRight, CloudLightning } from 'lucide-react';
-import avatarImg from '../assets/images/josue_avatar_1779587593398.png';
+import { Linkedin, Github, FileText, Send, ArrowRight, CloudLightning, GraduationCap } from 'lucide-react';
+import avatarImg from '../assets/images/FOTOMIA.jpg';
 
 interface InicioProps {
   onContactClick: () => void;
@@ -27,9 +27,9 @@ export const Inicio: React.FC<InicioProps> = ({ onContactClick, onTriggerLightni
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: 'easeOut' }}
             className="flex items-center gap-2 mb-4 bg-indigo-950/40 border border-indigo-500/30 px-3 py-1.5 rounded-full w-max cursor-pointer hover:border-indigo-400 group"
-            onClick={onTriggerLightning}
+        
           >
-            <CloudLightning className="w-3.5 h-3.5 text-indigo-400 animate-bounce group-hover:text-cyan-300" />
+            <GraduationCap className="w-3.5 h-3.5 text-indigo-400 animate-bounce group-hover:text-cyan-300" />
             <span className="text-[10px] font-mono font-medium tracking-wide text-indigo-200 uppercase">
               Ingeniero Tecnologías de la Información
             </span>
@@ -41,22 +41,20 @@ export const Inicio: React.FC<InicioProps> = ({ onContactClick, onTriggerLightni
             transition={{ duration: 0.8, delay: 0.1, ease: 'easeOut' }}
             className="text-4xl sm:text-5xl lg:text-6xl font-sans font-extrabold text-white tracking-tight leading-none mb-3"
           >
-            Josue Raymundo <br />
+            Josué Raymundo <br />
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-indigo-200 to-purple-400 drop-shadow-[0_2px_15px_rgba(99,102,241,0.25)]">
               Partida Flores
             </span>
           </motion.h1>
 
-          <motion.p
+          <motion.h2
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-sm sm:text-base text-neutral-400 max-w-lg mb-8 leading-relaxed font-sans"
+            className="text-lg sm:text-2xl text-neutral-400 max-w-lg mb-8 leading-relaxed font-sans"
           >
-            Especializado en diseñar e implementar arquitecturas robustas de software, APIs
-            escalables y bases de datos optimizadas. Apasionado por el desarrollo full-stack, la 
-            automatización y las interfaces cargadas de interactividad y estilo.
-          </motion.p>
+            Desarrollador Full-Stack Developer
+          </motion.h2>
 
           {/* Call to Actions & social links */}
           <motion.div
@@ -98,7 +96,7 @@ export const Inicio: React.FC<InicioProps> = ({ onContactClick, onTriggerLightni
             <span className="text-[10px] text-neutral-600 uppercase tracking-widest">Mis redes:</span>
             
             <a
-              href="https://linkedin.com"
+              href="https://linkedin.com/in/josue20" 
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-1.5 text-neutral-400 hover:text-indigo-400 transition-colors py-1 px-2 rounded-lg hover:bg-indigo-950/20"
@@ -108,7 +106,7 @@ export const Inicio: React.FC<InicioProps> = ({ onContactClick, onTriggerLightni
             </a>
 
             <a
-              href="https://github.com"
+              href="https://github.com/Joss177"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-1.5 text-neutral-400 hover:text-cyan-400 transition-colors py-1 px-2 rounded-lg hover:bg-cyan-950/20"
@@ -163,10 +161,7 @@ export const Inicio: React.FC<InicioProps> = ({ onContactClick, onTriggerLightni
               <span>Online</span>
             </div>
 
-            {/* Spark thunder icon decoration */}
-            <div className="absolute -bottom-2 -left-2 p-2.5 bg-black/80 backdrop-blur-md rounded-full border border-purple-500/40 text-purple-400 shadow-md">
-              <CloudLightning className="w-4 h-4 animate-[spin_5s_linear_infinite]" />
-            </div>
+            
           </motion.div>
         </div>
 

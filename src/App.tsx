@@ -141,16 +141,7 @@ export default function App() {
         </div>
       </footer>
 
-      {/* Floating helpful Storm Alert guidance (disappears after interaction) */}
-      <div className="fixed bottom-4 left-4 z-40 max-w-xs p-3 bg-neutral-950/90 backdrop-blur border border-indigo-500/30 rounded-xl shadow-2xl pointer-events-auto hidden md:flex items-start gap-2.5 animate-[bounce_4s_infinite]">
-        <CloudLightning className="w-4 h-4 text-indigo-400 mt-0.5 flex-shrink-0 animate-pulse" />
-        <div className="text-left font-mono text-[9px]">
-          <div className="text-white font-bold uppercase">EXPERIENCIA INMERSIVA</div>
-          <p className="text-neutral-450 text-neutral-400 mt-1">
-            Activa el altavoz del header para escuchar el sonido matemático de la lluvia y truenos sintéticos procedimentales.
-          </p>
-        </div>
-      </div>
+
 
     </div>
   );

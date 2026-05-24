@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { CloudLightning, Volume2, VolumeX } from 'lucide-react';
+import { CloudLightning, Volume2, VolumeX, Code2, GraduationCap } from 'lucide-react';
 
 interface HeaderProps {
   soundEnabled: boolean;
@@ -72,7 +72,7 @@ export const Header: React.FC<HeaderProps> = ({
           className="flex items-center gap-2 group text-left focus:outline-none"
         >
           <div className="relative p-1.5 rounded-lg bg-indigo-950/60 border border-indigo-500/35 group-hover:border-cyan-400/60 transition-colors">
-            <CloudLightning className="w-5 h-5 text-indigo-400 group-hover:text-cyan-300 transition-colors animate-pulse" />
+           <Code2 className="w-5 h-5 text-indigo-400 group-hover:text-cyan-300 transition-colors animate-pulse" />
             <span className="absolute -inset-0.5 rounded-lg bg-indigo-500/20 blur opacity-0 group-hover:opacity-100 transition-opacity" />
           </div>
           <div>

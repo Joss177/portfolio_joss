@@ -32,43 +32,66 @@ class StormAudioEngine {
         this.ctx.resume();
       }
 
-      if (this.rainNode) return; // Rain is already playing
+      if (this.rainNode) return;
 
-      // Create procedural rain using standard ScriptProcessorNode (safest fallback for simple generation)
-      // Generates pinkish/white noise with low-pass and high-pass filters for realistic rain rustle
       const bufferSize = 4096;
       this.rainNode = this.ctx.createScriptProcessor(bufferSize, 1, 1);
-      
-      let lastOut = 0.0;
+
+      let b0=0, b1=0, b2=0, b3=0, b4=0, b5=0, b6=0;
+
       this.rainNode.onaudioprocess = (e) => {
         const output = e.outputBuffer.getChannelData(0);
         for (let i = 0; i < bufferSize; i++) {
           const white = Math.random() * 2 - 1;
-          // Pink-brown filter: low pass filtering to give rumbling rain atmosphere
-          lastOut = 0.95 * lastOut + 0.05 * white;
-          output[i] = lastOut * 0.45 + white * 0.05; // Rain sound mixture
+
+          // Ruido ROSA — lluvia natural suave
+          b0 = 0.99886 * b0 + white * 0.0555179;
+          b1 = 0.99332 * b1 + white * 0.0750759;
+          b2 = 0.96900 * b2 + white * 0.1538520;
+          b3 = 0.86650 * b3 + white * 0.3104856;
+          b4 = 0.55000 * b4 + white * 0.5329522;
+          b5 = -0.7616 * b5 - white * 0.0168980;
+          const pink = b0 + b1 + b2 + b3 + b4 + b5 + b6 + white * 0.5362;
+          b6 = white * 0.115926;
+
+          output[i] = pink * 0.18;
         }
       };
 
-      // Add a Bandpass filter to make it sound like rain falling on a canvas tent/leaves
-      const rainFilter = this.ctx.createBiquadFilter();
-      rainFilter.type = 'peaking';
-      rainFilter.frequency.value = 800;
-      rainFilter.Q.value = 1.0;
-      rainFilter.gain.value = -3;
+      // Filtro 1: Gotas suaves (bajamos boost y frecuencia)
+      const dropFilter = this.ctx.createBiquadFilter();
+      dropFilter.type = 'peaking';
+      dropFilter.frequency.value = 2800;
+      dropFilter.Q.value = 0.5;
+      dropFilter.gain.value = 3; // Antes 8 — más suave
+
+      // Filtro 2: Cortar graves innecesarios
+      const highpass = this.ctx.createBiquadFilter();
+      highpass.type = 'highpass';
+      highpass.frequency.value = 400;
+
+      // Filtro 3: Suavizar altas frecuencias
+      const lowpass = this.ctx.createBiquadFilter();
+      lowpass.type = 'lowpass';
+      lowpass.frequency.value = 8000;
 
       this.rainGain = this.ctx.createGain();
       this.rainGain.gain.setValueAtTime(0, this.ctx.currentTime);
-      // Fade-in rain gently
-      this.rainGain.gain.linearRampToValueAtTime(0.35, this.ctx.currentTime + 2.0);
+      // Lluvia suave con fade-in lento
+      this.rainGain.gain.linearRampToValueAtTime(0.28, this.ctx.currentTime + 2.0);
 
-      this.rainNode.connect(rainFilter);
-      rainFilter.connect(this.rainGain);
+      this.rainNode.connect(highpass);
+      highpass.connect(dropFilter);
+      dropFilter.connect(lowpass);
+      lowpass.connect(this.rainGain);
       this.rainGain.connect(this.masterGain);
+
     } catch (err) {
       console.error('Failed to start procedural rain:', err);
     }
   }
+
+
 
   public stopRain() {
     if (this.rainGain && this.ctx) {
@@ -97,14 +120,13 @@ class StormAudioEngine {
 
       const now = this.ctx.currentTime;
 
-      // ---- 1. ELECTRIC SPARK / CRACKLE (High Frequency) ----
-      const sparkCount = 4 + Math.floor(Math.random() * 4);
+      // ---- 1. CHISPAS ELÉCTRICAS (más fuertes y numerosas) ----
+      const sparkCount = 6 + Math.floor(Math.random() * 5);
       for (let s = 0; s < sparkCount; s++) {
         const osc = this.ctx.createOscillator();
         const sparkGain = this.ctx.createGain();
-        
+
         osc.type = 'sawtooth';
-        // Random electric frequency crackles
         osc.frequency.setValueAtTime(100 + Math.random() * 900, now + s * 0.08);
         osc.frequency.exponentialRampToValueAtTime(10, now + s * 0.08 + 0.15);
 
@@ -113,7 +135,8 @@ class StormAudioEngine {
         sparkFilter.frequency.value = 2000;
 
         sparkGain.gain.setValueAtTime(0, now);
-        sparkGain.gain.linearRampToValueAtTime(0.08 + Math.random() * 0.1, now + s * 0.08);
+        // Chispas más fuertes
+        sparkGain.gain.linearRampToValueAtTime(0.18 + Math.random() * 0.15, now + s * 0.08);
         sparkGain.gain.exponentialRampToValueAtTime(0.0001, now + s * 0.08 + 0.15);
 
         osc.connect(sparkFilter);
@@ -124,41 +147,38 @@ class StormAudioEngine {
         osc.stop(now + s * 0.08 + 0.16);
       }
 
-      // ---- 2. LOW FREQUENCY DEEP RUMBLE (The main Thunder block) ----
+      // ---- 2. RETUMBO PROFUNDO (más fuerte y grave) ----
       const rumbleDur = 3.5 + Math.random() * 3.5;
       const rumbleGain = this.ctx.createGain();
       rumbleGain.gain.setValueAtTime(0, now);
-      // Sudden burst of rumble then rolling decay
-      rumbleGain.gain.linearRampToValueAtTime(0.5 + Math.random() * 0.4, now + 0.1);
-      
-      // Roll/vibrate gain to simulate distance and echoing clouds
+      // Impacto inicial mucho más fuerte
+      rumbleGain.gain.linearRampToValueAtTime(0.85 + Math.random() * 0.15, now + 0.1);
+
       let tOffset = 0.2;
       while (tOffset < rumbleDur) {
-        const nextGain = (0.1 + Math.random() * 0.3) * (1.0 - tOffset / rumbleDur);
+        const nextGain = (0.15 + Math.random() * 0.35) * (1.0 - tOffset / rumbleDur);
         rumbleGain.gain.linearRampToValueAtTime(nextGain, now + tOffset);
         tOffset += 0.2 + Math.random() * 0.4;
       }
       rumbleGain.gain.linearRampToValueAtTime(0.0001, now + rumbleDur);
 
-      // Procedural rumbling noise generator
       const rumbleNoise = this.ctx.createScriptProcessor(4096, 1, 1);
       let noiseOut = 0.0;
       rumbleNoise.onaudioprocess = (e) => {
         const output = e.outputBuffer.getChannelData(0);
         for (let i = 0; i < 4096; i++) {
           const white = Math.random() * 2 - 1;
-          // Brownian low-frequency focus
           noiseOut = 0.995 * noiseOut + 0.005 * white;
           output[i] = noiseOut;
         }
       };
 
-      // Filters to simulate atmospheric damping
+      // Más grave y profundo
       const lowpass1 = this.ctx.createBiquadFilter();
       lowpass1.type = 'lowpass';
-      lowpass1.frequency.setValueAtTime(80, now);
-      lowpass1.frequency.exponentialRampToValueAtTime(45, now + rumbleDur);
-      
+      lowpass1.frequency.setValueAtTime(100, now);
+      lowpass1.frequency.exponentialRampToValueAtTime(55, now + rumbleDur);
+
       const lowpass2 = this.ctx.createBiquadFilter();
       lowpass2.type = 'lowpass';
       lowpass2.frequency.setValueAtTime(120, now);
@@ -168,8 +188,6 @@ class StormAudioEngine {
       lowpass2.connect(rumbleGain);
       rumbleGain.connect(this.masterGain);
 
-      // Start and clear node
-      rumbleNoise.onaudioprocess = rumbleNoise.onaudioprocess; // Bind
       setTimeout(() => {
         rumbleNoise.disconnect();
         lowpass1.disconnect();
