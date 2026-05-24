@@ -103,39 +103,8 @@ export default function App() {
               © 2026 JOSUE RAYMUNDO PARTIDA FLORES. TODOS LOS DERECHOS RESERVADOS.
             </p>
             <p className="text-[10px] font-mono text-neutral-600 mt-1 uppercase tracking-widest">
-              INGENIERO EN TECNOLOGÍAS DE LA INFORMACIÓN // DISEÑO DE ALTO VOLTAJE
+              INGENIERO EN TECNOLOGÍAS DE LA INFORMACIÓN 
             </p>
-          </div>
-
-          {/* Quick Storm Engine status settings on bottom */}
-          <div className="flex items-center gap-4 bg-black/60 px-4 py-2 rounded-xl border border-neutral-800">
-            <div className="flex items-center gap-2">
-              <span className="h-1.5 w-1.5 rounded-full bg-indigo-400 animate-ping" />
-              <span className="text-[10px] font-mono text-neutral-400 uppercase">Estado de tormenta:</span>
-            </div>
-
-            <div className="flex gap-1.5">
-              <button
-                onClick={() => setThemeMode('mild')}
-                className={`px-2 py-0.5 rounded text-[9px] font-mono font-bold uppercase transition-all ${
-                  themeMode === 'mild'
-                    ? 'bg-neutral-800 text-white border border-neutral-600'
-                    : 'text-neutral-500 hover:text-neutral-300'
-                }`}
-              >
-                Llovizna
-              </button>
-              <button
-                onClick={() => setThemeMode('heavy')}
-                className={`px-2 py-0.5 rounded text-[9px] font-mono font-bold uppercase transition-all ${
-                  themeMode === 'heavy'
-                    ? 'bg-indigo-950/60 text-indigo-300 border border-indigo-500/40'
-                    : 'text-neutral-500 hover:text-neutral-300'
-                }`}
-              >
-                Tormenta Eléctrica
-              </button>
-            </div>
           </div>
           
         </div>

@@ -91,9 +91,7 @@ export const Habilidades: React.FC = () => {
                       {s.name}
                     </span>
 
-                    <span className="absolute bottom-1 right-2 text-[7px] font-mono text-neutral-700/85">
-                      [ {key.substring(0, 3)} ]
-                    </span>
+
                   </motion.div>
                 );
               })}

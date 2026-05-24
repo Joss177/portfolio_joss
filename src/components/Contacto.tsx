@@ -12,21 +12,33 @@ export const Contacto: React.FC = () => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.name || !formData.email || !formData.message) {
-      alert('Por favor, rellena los campos marcados como obligatorios (*)');
+      alert('Por favor, rellena los campos obligatorios (*)');
       return;
     }
 
     setIsSubmitting(true);
-    // Simulate API mail post
-    setTimeout(() => {
+    try {
+      const res = await fetch('https://formspree.io/f/xgoqzqno', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+
+      if (res.ok) {
+        setSubmitSuccess(true);
+        setFormData({ name: '', email: '', subject: '', message: '' });
+        setTimeout(() => setSubmitSuccess(false), 5000);
+      } else {
+        alert('Hubo un error al enviar. Intenta de nuevo.');
+      }
+    } catch {
+      alert('Error de conexión. Intenta de nuevo.');
+    } finally {
       setIsSubmitting(false);
-      setSubmitSuccess(true);
-      setFormData({ name: '', email: '', subject: '', message: '' });
-      setTimeout(() => setSubmitSuccess(false), 5000); // clear splash after 5s
-    }, 1800);
+    }
   };
 
   const stack = [
@@ -51,15 +63,13 @@ export const Contacto: React.FC = () => {
           {/* Left Column: Title, information and Tech Stack */}
           <div className="md:col-span-5 text-left space-y-8">
             <div>
-              <p className="text-xs font-mono font-medium tracking-widest text-indigo-400 uppercase mb-1">
-                ¿TIENES UN PROYECTO EN MENTE?
-              </p>
+
               <h2 className="text-4xl font-sans font-black text-white tracking-tight">
                 ¡Hablemos!
               </h2>
               <p className="text-sm text-neutral-400 mt-4 leading-relaxed font-sans">
-                ¿Buscas optimizar servidores, construir APIs ágiles o renovar un portal interactivo? 
-                Envíame un mensaje y colaboremos juntos en tu próximo desafío digital.
+                ¿Buscas construir una página web moderna, renovar tu sitio actual o darle vida a una idea digital?
+                Envíame un mensaje y colaboremos juntos en tu próximo proyecto.
               </p>
             </div>
 
@@ -68,7 +78,7 @@ export const Contacto: React.FC = () => {
               <div className="flex items-center gap-2 text-indigo-400 pb-2 border-b border-neutral-800">
                 <Cpu className="w-4 h-4 text-cyan-400" />
                 <span className="text-xs font-mono font-bold tracking-wider uppercase text-white">
-                  Tecnología que se utilizó
+                  Tecnología de esta pagina
                 </span>
               </div>
               
@@ -88,7 +98,6 @@ export const Contacto: React.FC = () => {
             <div className="space-y-2 text-xs font-mono text-neutral-500">
               <div>Ubicación: México // Remoto</div>
               <div>Zona Horaria: UTC-6 (CST)</div>
-              <div>Contacto: josueraymundo406@gmail.com</div>
             </div>
           </div>
 
