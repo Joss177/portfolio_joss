@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'motion/react';
 import { Terminal, Shield, Trophy, Sparkles } from 'lucide-react';
-import avatarImg from '../assets/images/josue_avatar_1779587593398.png';
+import avatarImg from '../assets/images/FOTOMIA.jpg';
 
 export const SobreMi: React.FC = () => {
   return (
@@ -71,17 +71,15 @@ export const SobreMi: React.FC = () => {
               <div className="bg-neutral-900/65 border border-indigo-950/20 p-6 rounded-2xl relative group hover:border-indigo-500/20 transition-all duration-300">
                 <div className="flex items-center gap-2 mb-3 text-indigo-400">
                   <Terminal className="w-4 h-4 text-indigo-400/95" />
-                  <span className="text-[10px] font-mono tracking-widest uppercase">Formación y Enfoque</span>
+                  <span className="text-[10px] font-mono tracking-widest uppercase">Acerca de mí</span>
                 </div>
-                <p className="text-neutral-300 text-xs sm:text-sm leading-relaxed font-sans">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor 
-                  incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud 
-                  exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure 
-                  dolor in reprehenderit in voluptate.
-                </p>
-                <span className="absolute bottom-3 right-3 text-[10px] font-mono text-neutral-700 group-hover:text-indigo-600/65 transition-colors">
-                  01 // PARAGRAPH
-                </span>
+               <p className="text-neutral-300 text-xs sm:text-sm leading-relaxed font-sans">
+                Desarrollador web con hambre de crecer y obsesión por escribir código que 
+                funcione de verdad. En mi primer año ya he trabajado con React, PHP, JavaScript 
+                y MySQL, aprendiendo rápido, adaptándome más rápido. No busco solo hacer 
+                las cosas, busco hacerlas bien.
+              </p>
+            
               </div>
 
               {/* Paragraph 2 */}
@@ -91,49 +89,46 @@ export const SobreMi: React.FC = () => {
                   <span className="text-[10px] font-mono tracking-widest uppercase">Metas y Aspiraciones</span>
                 </div>
                 <p className="text-neutral-300 text-xs sm:text-sm leading-relaxed font-sans">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis aute irure dolor in 
-                  reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur 
-                  sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id 
-                  est laborum. Consectetur elit sed do eiusmod lorem.
-                </p>
-                <span className="absolute bottom-3 right-3 text-[10px] font-mono text-neutral-700 group-hover:text-cyan-600/65 transition-colors">
-                  02 // PARAGRAPH
-                </span>
+                Mi meta este año es convertirme en desarrollador Full-Stack. Ya tengo 
+                la base del frontend, ahora estoy enfocado en dominar el backend y 
+                unir ambos mundos. Quiero ser el tipo de desarrollador que puede tomar 
+                un proyecto de cero y llevarlo hasta producción.
+              </p>
               </div>
             </motion.div>
 
             {/* Quick dynamic status tags/stats */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 1, delay: 0.3 }}
-              className="grid grid-cols-3 gap-4 font-mono text-neutral-400 text-[10px] border-t border-neutral-850 pt-5"
-            >
-              <div className="flex items-center gap-2">
-                <Trophy className="w-3.5 h-3.5 text-orange-400" />
-                <div>
-                  <div className="text-white font-bold">100% Comprometido</div>
-                  <div className="text-[9px] text-neutral-500">Ingeniería Web</div>
-                </div>
+           <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1, delay: 0.3 }}
+            className="grid grid-cols-3 gap-4 font-mono text-neutral-400 text-[10px] border-t border-neutral-850 pt-5"
+          >
+            <div className="flex items-center gap-2">
+              <Trophy className="w-3.5 h-3.5 text-orange-400" />
+              <div>
+                <div className="text-white font-bold">Aprendizaje Rápido</div>
+                <div className="text-[9px] text-neutral-500">Me adapto a cualquier stack</div>
               </div>
+            </div>
 
-              <div className="flex items-center gap-2">
-                <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
-                <div>
-                  <div className="text-white font-bold">Arquitecturas Limpias</div>
-                  <div className="text-[9px] text-neutral-500">FastAPI, React & Astro</div>
-                </div>
+            <div className="flex items-center gap-2">
+              <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
+              <div>
+                <div className="text-white font-bold">Trabajo en Equipo</div>
+                <div className="text-[9px] text-neutral-500">Comunicación y colaboración</div>
               </div>
+            </div>
 
-              <div className="flex items-center gap-2">
-                <Terminal className="w-3.5 h-3.5 text-purple-400" />
-                <div>
-                  <div className="text-white font-bold">Bases de Datos</div>
-                  <div className="text-[9px] text-neutral-500 font-sans">SQL Avanzado</div>
-                </div>
+            <div className="flex items-center gap-2">
+              <Terminal className="w-3.5 h-3.5 text-purple-400" />
+              <div>
+                <div className="text-white font-bold">Resolución de Problemas</div>
+                <div className="text-[9px] text-neutral-500">Enfocado en soluciones</div>
               </div>
-            </motion.div>
+            </div>
+          </motion.div>
 
           </div>
 
