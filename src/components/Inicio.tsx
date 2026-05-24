@@ -53,7 +53,7 @@ export const Inicio: React.FC<InicioProps> = ({ onContactClick, onTriggerLightni
             transition={{ duration: 0.8, delay: 0.2 }}
             className="text-lg sm:text-2xl text-neutral-400 max-w-lg mb-8 leading-relaxed font-sans"
           >
-            Desarrollador Full-Stack Developer
+            Full Stack Web Development
           </motion.h2>
 
           {/* Call to Actions & social links */}
@@ -74,11 +74,8 @@ export const Inicio: React.FC<InicioProps> = ({ onContactClick, onTriggerLightni
 
             {/* Simulated CV download with nice feedback or actual alert description */}
             <a
-              href="#cv"
-              onClick={(e) => {
-                e.preventDefault();
-                alert('Curriculum Vitae (CV) - Descarga iniciada de forma simulada.');
-              }}
+            href="/JosueCV.pdf"
+              download="CV_Josue_Partida.pdf"
               className="px-6 py-3 rounded-xl bg-neutral-900 hover:bg-neutral-800 text-neutral-300 hover:text-white font-medium text-xs tracking-wider uppercase transition-all border border-neutral-700 hover:border-neutral-500 active:scale-[0.98] focus:outline-none flex items-center gap-2"
             >
               <FileText className="w-4 h-4 text-neutral-400" />

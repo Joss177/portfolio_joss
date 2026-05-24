@@ -90,7 +90,7 @@ export const SobreMi: React.FC = () => {
                 </div>
                 <p className="text-neutral-300 text-xs sm:text-sm leading-relaxed font-sans">
                 Mi meta este año es convertirme en desarrollador Full-Stack. Ya tengo 
-                la base del frontend, ahora estoy enfocado en dominar el backend y 
+                la base del backend, ahora estoy enfocado en dominar el fronted y 
                 unir ambos mundos. Quiero ser el tipo de desarrollador que puede tomar 
                 un proyecto de cero y llevarlo hasta producción.
               </p>
