@@ -1,9 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { FolderGit2, ArrowUpRight, X, Sparkles, CloudLightning } from 'lucide-react';
+import { FolderGit2, ArrowUpRight, X, CloudLightning, ChevronLeft, ChevronRight } from 'lucide-react';
 import projectFastApiImg from '../assets/images/Vocalb.png';
 import projectAstroImg from '../assets/images/CLASSTRACK.png';
 import projectDatabaseImg from '../assets/images/EDCO.png';
+import projectErpImg from '../assets/images/NextProyect.png';
+import projectDatabaseImg2 from '../assets/images/EDCO2.png';
+import projectDatabaseImg3 from '../assets/images/EDCO4.png';
+import projectDatabaseImg4 from '../assets/images/EDCO5.png';
 
 interface ProjectItem {
   id: number;
@@ -11,11 +15,133 @@ interface ProjectItem {
   subtitle: string;
   description: string;
   tech: string[];
-  imageUrl: string;
+  images: string[];
   repoUrl: string;
   accentColor: string;
 }
 
+// ─── Mini Carousel ────────────────────────────────────────────────────────────
+interface CarouselProps {
+  images: string[];
+  title: string;
+}
+
+const ImageCarousel: React.FC<CarouselProps> = ({ images, title }) => {
+  const [current, setCurrent] = useState(0);
+  const [direction, setDirection] = useState<1 | -1>(1);
+
+  // ── Drag to pan ──────────────────────────────────────────────
+  const [offset, setOffset] = useState({ x: 0, y: 0 });
+  const [isDragging, setIsDragging] = useState(false);
+  const dragStart = useRef<{ mx: number; my: number; ox: number; oy: number } | null>(null);
+  const MAX_PAN = 18;
+
+  const clamp = (val: number, min: number, max: number) => Math.min(Math.max(val, min), max);
+
+  const onMouseDown = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    dragStart.current = { mx: e.clientX, my: e.clientY, ox: offset.x, oy: offset.y };
+    setIsDragging(true);
+  };
+
+  const onMouseMove = (e: React.MouseEvent) => {
+    if (!dragStart.current) return;
+    const dx = ((e.clientX - dragStart.current.mx) / e.currentTarget.clientWidth) * 100;
+    const dy = ((e.clientY - dragStart.current.my) / e.currentTarget.clientHeight) * 100;
+    setOffset({
+      x: clamp(dragStart.current.ox + dx, -MAX_PAN, MAX_PAN),
+      y: clamp(dragStart.current.oy + dy, -MAX_PAN, MAX_PAN),
+    });
+  };
+
+  const onMouseUp = () => {
+    dragStart.current = null;
+    setIsDragging(false);
+  };
+
+  // Reset pan when slide changes
+  useEffect(() => { setOffset({ x: 0, y: 0 }); }, [current]);
+
+  const go = (dir: 1 | -1, e: React.MouseEvent) => {
+    e.stopPropagation();
+    setDirection(dir);
+    setCurrent((prev) => (prev + dir + images.length) % images.length);
+  };
+
+  const variants = {
+    enter: (dir: number) => ({ x: dir > 0 ? '100%' : '-100%', opacity: 0 }),
+    center: { x: 0, opacity: 1 },
+    exit: (dir: number) => ({ x: dir > 0 ? '-100%' : '100%', opacity: 0 }),
+  };
+
+  return (
+    <div
+      className="w-full h-full relative overflow-hidden"
+      onMouseDown={onMouseDown}
+      onMouseMove={onMouseMove}
+      onMouseUp={onMouseUp}
+      onMouseLeave={onMouseUp}
+      style={{ cursor: isDragging ? 'grabbing' : 'grab' }}
+    >
+      {/* Slides */}
+      <AnimatePresence initial={false} custom={direction} mode="sync">
+        <motion.img
+          key={current}
+          custom={direction}
+          variants={variants}
+          initial="enter"
+          animate="center"
+          exit="exit"
+          transition={{ duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
+          src={images[current]}
+          alt={`${title} screenshot ${current + 1}`}
+          className="absolute inset-0 w-full h-full object-cover grayscale-[35%] group-hover:grayscale-0 transition-filter duration-700"
+          style={{
+            willChange: 'transform',
+            objectPosition: `${50 + offset.x}% ${50 + offset.y}%`,
+            transition: isDragging ? 'none' : 'object-position 0.3s ease',
+          }}
+          draggable={false}
+        />
+      </AnimatePresence>
+
+      {/* Arrows */}
+      {images.length > 1 && (
+        <>
+          <button
+            onClick={(e) => go(-1, e)}
+            className="absolute left-2 top-1/2 -translate-y-1/2 z-10 p-1 rounded-lg bg-black/50 hover:bg-black/80 text-white/70 hover:text-white transition-all opacity-0 group-hover:opacity-100"
+          >
+            <ChevronLeft className="w-4 h-4" />
+          </button>
+          <button
+            onClick={(e) => go(1, e)}
+            className="absolute right-2 top-1/2 -translate-y-1/2 z-10 p-1 rounded-lg bg-black/50 hover:bg-black/80 text-white/70 hover:text-white transition-all opacity-0 group-hover:opacity-100"
+          >
+            <ChevronRight className="w-4 h-4" />
+          </button>
+        </>
+      )}
+
+      {/* Dot indicators */}
+      {images.length > 1 && (
+        <div className="absolute bottom-16 left-1/2 -translate-x-1/2 flex gap-1.5 z-10">
+          {images.map((_, i) => (
+            <button
+              key={i}
+              onClick={(e) => { e.stopPropagation(); setCurrent(i); }}
+              className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${
+                i === current ? 'bg-indigo-400 w-3' : 'bg-white/30 hover:bg-white/60'
+              }`}
+            />
+          ))}
+        </div>
+      )}
+    </div>
+  );
+};
+
+// ─── Main Section ─────────────────────────────────────────────────────────────
 export const Proyectos: React.FC = () => {
   const [activeProjectId, setActiveProjectId] = useState<number | null>(null);
 
@@ -23,10 +149,11 @@ export const Proyectos: React.FC = () => {
     {
       id: 1,
       title: 'VocabQuest',
-      subtitle: 'Pagina web de Aprendizaje en Ingles',
-      description: 'VocabQuest es una pagina web de aprendizaje de vocabulario inglés estilo Kahoot, diseñada para estudiar vocabulario de B1 que se preparan para el TOEFL. de mi universidad',
-      tech: ['React', 'Vite', 'TypeScript', 'FireBase'],
-      imageUrl: projectFastApiImg,
+      subtitle: 'Pagina web de Aprendizaje en Inglés',
+      description:
+        'VocabQuest es una página web de aprendizaje de vocabulario inglés estilo Kahoot, diseñada para estudiar vocabulario de B1 que se preparan para el TOEFL de mi universidad.',
+      tech: ['React', 'Vite', 'TypeScript', 'Firebase'],
+      images: [projectFastApiImg, projectFastApiImg, projectFastApiImg],
       repoUrl: 'https://github.com/Joss177/-VocabQuest',
       accentColor: 'indigo-500',
     },
@@ -34,41 +161,47 @@ export const Proyectos: React.FC = () => {
       id: 2,
       title: 'ClassTrack',
       subtitle: 'Sistema Web Universitario',
-      description: 'Classtrack es una aplicativa web para la Universidad Politécnica de Sinaloa, especificamente para la carrera de TI. Gestión de usuarios (Laboratorista, Docentes). Gestión de camaras de seguridad y de horarios. Gestión de google sheets con asistencias de alumnos. Gestión de procesos administrativos.',
-      tech: ['FastApi','React','Vue','Python',  'Postgresql'],
-      imageUrl: projectAstroImg,
+      description:
+        'Classtrack es una aplicación web para la Universidad Politécnica de Sinaloa, específicamente para la carrera de TI. Gestión de usuarios (Laboratorista, Docentes), cámaras de seguridad, horarios, Google Sheets con asistencias y procesos administrativos.',
+      tech: ['FastAPI', 'React', 'Vue', 'Python', 'PostgreSQL'],
+      images: [projectAstroImg, projectAstroImg, projectAstroImg],
       repoUrl: 'https://github.com/Joss177/ClassTrack2',
       accentColor: 'purple-500',
     },
     {
       id: 3,
       title: 'EDCO',
-      subtitle: 'Sistema Web Constructura',
-      description: 'EDCO es un sistema web para una constructura. Gestión de usuarios como supervisores, contratistas, encargados, Creación de proyectos, documentos y exportalos en PDF (requisiciones, reportes, estados de cuenta). Subir fotografias y videos de en cada proyecto, y gestión pagos de materiales.',
+      subtitle: 'Sistema Web Constructora',
+      description:
+        'EDCO es un sistema web para una constructora. Gestión de supervisores, contratistas y encargados. Creación de proyectos, documentos exportables en PDF (requisiciones, reportes, estados de cuenta), fotografías/videos por proyecto y gestión de pagos de materiales.',
       tech: ['CakePHP', 'PHP', 'JS', 'MySQL'],
-      imageUrl: projectDatabaseImg,
-      repoUrl: 'x',
+      images: [projectDatabaseImg, projectDatabaseImg2, projectDatabaseImg3, projectDatabaseImg4],
+      repoUrl: '#',
+      accentColor: 'cyan-500',
+    },
+
+    {
+      id: 4,
+      title: 'Sistema ERP',
+      subtitle: 'Proximo Proyecto',
+      description:
+        'Sistema ERP básico desarrollado como proyecto de práctica. Gestión de inventario, ventas y clientes en una sola plataforma, enfocado en entender flujos empresariales reales.',
+      tech: ['?', '?', '?', '?'],
+      images: [projectErpImg],
+      repoUrl: '#',
       accentColor: 'cyan-500',
     },
   ];
 
   const handleToggleProject = (id: number) => {
-    if (activeProjectId === id) {
-      setActiveProjectId(null); // Close if clicked again
-    } else {
-      setActiveProjectId(id); // Open selection
-    }
+    setActiveProjectId((prev) => (prev === id ? null : id));
   };
 
   return (
     <section id="proyectos" className="py-24 relative overflow-hidden bg-neutral-950/40">
-      
-      {/* Background neon ambient */}
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[35rem] h-[35rem] bg-indigo-950/10 rounded-full blur-[140px] pointer-events-none" />
 
       <div className="w-[92%] max-w-5xl mx-auto relative z-20">
-        
-        {/* Section title */}
         <div className="mb-16 text-center md:text-left">
           <p className="text-xs font-mono font-medium tracking-widest text-indigo-400 uppercase mb-1">
             PORTFOLIO DE CREACIONES
@@ -80,11 +213,10 @@ export const Proyectos: React.FC = () => {
             <div className="h-0.5 flex-1 max-w-[12rem] bg-indigo-500/20 rounded hidden md:block" />
           </div>
           <p className="text-xs font-mono text-neutral-500 mt-2">
-            Da clic sobre cada casilla para revelar detalles técnicos y código fuente
+            Hover para navegar capturas · Clic para revelar detalles técnicos
           </p>
         </div>
 
-        {/* PROJECTS CASILLAS GRID */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {projects.map((proj) => {
             const isSelected = activeProjectId === proj.id;
@@ -99,25 +231,26 @@ export const Proyectos: React.FC = () => {
                 className="relative h-96 rounded-2xl border border-neutral-800 bg-neutral-900/60 overflow-hidden group shadow-2xl cursor-pointer"
                 onClick={() => handleToggleProject(proj.id)}
               >
-                {/* 1. Project Background Image with reactive Blur Filter on click */}
-                <div 
-                  className="w-full h-full relative overflow-hidden transition-all duration-500 bg-neutral-950"
+    
+                <div
+                  className="w-full h-full transition-all duration-500"
                   style={{
                     filter: isSelected ? 'blur(12px) brightness(0.25)' : 'none',
-                    scale: isSelected ? 1.05 : 1.0,
+                    transform: isSelected ? 'scale(1.05)' : 'scale(1)',
                   }}
                 >
-                  <img
-                    src={proj.imageUrl}
-                    alt={proj.title}
-                    className="w-full h-full object-cover grayscale-[40%] group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
-                    referrerPolicy="no-referrer"
+                  <ImageCarousel images={proj.images} title={proj.title} />
+
+                  <div
+                    className={`absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent transition-opacity duration-300 pointer-events-none ${
+                      isSelected ? 'opacity-0' : 'opacity-100'
+                    }`}
                   />
-                  
-                  {/* Outer gradient overlay showing basic title from start */}
-                  <div className={`absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent transition-opacity duration-300 ${isSelected ? 'opacity-0' : 'opacity-100'}`} />
-                  
-                  <div className={`absolute bottom-6 inset-x-6 z-10 text-left transition-all duration-300 ${isSelected ? 'translate-y-8 opacity-0' : 'translate-y-0 opacity-100'}`}>
+                  <div
+                    className={`absolute bottom-6 inset-x-6 z-10 text-left transition-all duration-300 ${
+                      isSelected ? 'translate-y-8 opacity-0' : 'translate-y-0 opacity-100'
+                    }`}
+                  >
                     <span className="text-[9px] font-mono tracking-widest text-indigo-400 uppercase font-bold bg-indigo-950/80 px-2 py-1 rounded border border-indigo-500/20">
                       {proj.tech[0]}
                     </span>
@@ -130,7 +263,7 @@ export const Proyectos: React.FC = () => {
                   </div>
                 </div>
 
-                {/* 2. Detailed Info Overlay rendered dynamically with Blur effect active */}
+                {/* ── Info overlay ── */}
                 <AnimatePresence>
                   {isSelected && (
                     <motion.div
@@ -139,9 +272,8 @@ export const Proyectos: React.FC = () => {
                       exit={{ opacity: 0, scale: 0.95 }}
                       transition={{ duration: 0.35, ease: 'easeOut' }}
                       className="absolute inset-0 p-6 flex flex-col justify-between text-left z-20 bg-black/45 cursor-default"
-                      onClick={(e) => e.stopPropagation()} // Stop clicking inside overlay from closing
+                      onClick={(e) => e.stopPropagation()}
                     >
-                      {/* Close Trigger Button */}
                       <button
                         onClick={() => setActiveProjectId(null)}
                         className="absolute top-4 right-4 p-1.5 rounded-lg bg-neutral-900 hover:bg-neutral-800 border border-neutral-700/60 text-neutral-400 hover:text-white transition-all focus:outline-none active:scale-95"
@@ -168,10 +300,9 @@ export const Proyectos: React.FC = () => {
                           {proj.description}
                         </p>
 
-                        {/* Technologies badges */}
                         <div className="flex flex-wrap gap-1.5 pt-1">
                           {proj.tech.map((v) => (
-                            <span 
+                            <span
                               key={v}
                               className="px-2 py-0.5 rounded text-[9px] font-mono text-cyan-300 bg-cyan-950/40 border border-cyan-500/20"
                             >
@@ -181,35 +312,28 @@ export const Proyectos: React.FC = () => {
                         </div>
                       </div>
 
-                      {/* Code Repository Button */}
                       <div className="pt-4 border-t border-neutral-800/80 flex justify-between items-center">
-                        <span className="text-[9px] font-mono text-neutral-500">
-                          STATUS // COMPILED // OK
-                        </span>
-                        
+    
                         <a
                           href={proj.repoUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="flex items-center gap-1.5 px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-mono text-[10px] uppercase font-bold tracking-wider hover:shadow-[0_0_15px_rgba(99,102,241,0.4)] active:scale-95 transition-all text-right"
+                          className="flex items-center gap-1.5 px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-mono text-[10px] uppercase font-bold tracking-wider hover:shadow-[0_0_15px_rgba(99,102,241,0.4)] active:scale-95 transition-all"
                         >
                           <FolderGit2 className="w-3.5 h-3.5" />
                           <span>Repositorio</span>
                           <ArrowUpRight className="w-3 h-3" />
                         </a>
                       </div>
-
                     </motion.div>
                   )}
                 </AnimatePresence>
 
-                {/* Subtle outer hover lighting flare */}
                 <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-indigo-500/10 to-transparent rounded-full opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
               </motion.div>
             );
           })}
         </div>
-
       </div>
     </section>
   );
