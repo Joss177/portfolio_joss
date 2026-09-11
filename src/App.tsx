@@ -53,12 +53,14 @@ export default function App() {
     <div className="min-h-screen bg-[#07070a] text-neutral-100 font-sans selection:bg-indigo-500/35 selection:text-white relative overflow-hidden">
       
       {/* 1. Procedural Falling Rain & Animated Lightning background layer */}
+      {/* Lluvia desactivada temporalmente (sin borrar código, solo comentado):
       <RainEffect
         density={themeMode === 'heavy' ? 70 : 30}
         isStorm={themeMode === 'heavy'}
         lightningTrigger={lightningCounter}
         onLightningStrike={handleLightningStrikeSound}
       />
+      */}
 
       {/* Atmospheric moving clouds shadows wrapper container */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden mix-blend-color-burn opacity-25 select-none z-0">

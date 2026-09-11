@@ -74,10 +74,7 @@ export const SobreMi: React.FC = () => {
                   <span className="text-[10px] font-mono tracking-widest uppercase">Acerca de mí</span>
                 </div>
                <p className="text-neutral-300 text-xs sm:text-sm leading-relaxed font-sans">
-                Desarrollador web con hambre de crecer y obsesión por escribir código que 
-                funcione de verdad. En mi primer año ya he trabajado con React, PHP, JavaScript 
-                y MySQL, aprendiendo rápido, adaptándome más rápido. No busco solo hacer 
-                las cosas, busco hacerlas bien.
+                Profesional de TI con experiencia en programación, bases de datos SQL e inteligencia artificial. Con conocimientos en análisis de datos y visión por computadora, enfocado en desarrollar soluciones eficientes, resolver problemas y aprender continuamente.
               </p>
             
               </div>
@@ -89,10 +86,8 @@ export const SobreMi: React.FC = () => {
                   <span className="text-[10px] font-mono tracking-widest uppercase">Metas y Aspiraciones</span>
                 </div>
                 <p className="text-neutral-300 text-xs sm:text-sm leading-relaxed font-sans">
-                Mi meta este año es convertirme en desarrollador Full-Stack. Ya tengo 
-                la base del backend, ahora estoy enfocado en dominar el fronted y 
-                unir ambos mundos. Quiero ser el tipo de desarrollador que puede tomar 
-                un proyecto de cero y llevarlo hasta producción.
+                Desarrollarme profesionalmente en el área de análisis y ciencia de datos, fortaleciendo mis conocimientos en SQL, Python, inteligencia artificial y machine learning. Busco participar en proyectos donde pueda aplicar mis habilidades técnicas para analizar datos y generar soluciones que aporten valor a las organizaciones.
+
               </p>
               </div>
             </motion.div>
@@ -108,16 +103,16 @@ export const SobreMi: React.FC = () => {
             <div className="flex items-center gap-2">
               <Trophy className="w-3.5 h-3.5 text-orange-400" />
               <div>
-                <div className="text-white font-bold">Aprendizaje Rápido</div>
-                <div className="text-[9px] text-neutral-500">Me adapto a cualquier stack</div>
+                <div className="text-white font-bold">Aprendizaje Continuo</div>
+                <div className="text-[9px] text-neutral-500">Siempre ampliando mis conocimientos</div>
               </div>
             </div>
 
             <div className="flex items-center gap-2">
               <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
               <div>
-                <div className="text-white font-bold">Trabajo en Equipo</div>
-                <div className="text-[9px] text-neutral-500">Comunicación y colaboración</div>
+                <div className="text-white font-bold">Análisis de Datos</div>
+                <div className="text-[9px] text-neutral-500">Datos para generar información útil</div>
               </div>
             </div>
 
@@ -125,9 +120,10 @@ export const SobreMi: React.FC = () => {
               <Terminal className="w-3.5 h-3.5 text-purple-400" />
               <div>
                 <div className="text-white font-bold">Resolución de Problemas</div>
-                <div className="text-[9px] text-neutral-500">Enfocado en soluciones</div>
+                <div className="text-[9px] text-neutral-500">Enfoque lógico y orientado a soluciones</div>
               </div>
             </div>
+
           </motion.div>
 
           </div>

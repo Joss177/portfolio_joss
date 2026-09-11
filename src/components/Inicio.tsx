@@ -47,13 +47,14 @@ export const Inicio: React.FC<InicioProps> = ({ onContactClick, onTriggerLightni
             </span>
           </motion.h1>
 
+
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
             className="text-lg sm:text-2xl text-neutral-400 max-w-lg mb-8 leading-relaxed font-sans"
           >
-            Full Stack Web Development
+            {/*  Full Stack Web Development  */}
           </motion.h2>
 
           {/* Call to Actions & social links */}
@@ -149,14 +150,7 @@ export const Inicio: React.FC<InicioProps> = ({ onContactClick, onTriggerLightni
               </div>
             </div>
 
-            {/* Little floating indicators */}
-            <div className="absolute -top-3 -right-3 p-2 bg-black/85 backdrop-blur-md rounded-xl border border-indigo-400/40 text-sky-400 text-xs font-mono shadow-lg flex items-center gap-1.5">
-              <span className="flex h-2 w-2 relative">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-500"></span>
-              </span>
-              <span>Online</span>
-            </div>
+            
 
             
           </motion.div>

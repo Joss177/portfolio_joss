@@ -110,7 +110,7 @@ export const Header: React.FC<HeaderProps> = ({
 
         {/* Sound toggle & lightning bolt controller */}
         <div className="flex items-center gap-2">
-          {/* Lightning trigger */}
+          {/* Lightning trigger 
           <button
             onClick={onTriggerLightning}
             title="Invocar Relámpago"
@@ -118,8 +118,9 @@ export const Header: React.FC<HeaderProps> = ({
           >
             <CloudLightning className="w-4 h-4" />
           </button>
+          */}
 
-          {/* Sound toggle */}
+          {/* Sound toggle 
           <button
             onClick={onToggleSound}
             title={soundEnabled ? 'Silenciar sonidos de tormenta' : 'Activar sonido de tormenta'}
@@ -131,6 +132,7 @@ export const Header: React.FC<HeaderProps> = ({
           >
             {soundEnabled ? <Volume2 className="w-4 h-4" /> : <VolumeX className="w-4 h-4" />}
           </button>
+          */}
         </div>
       </div>
     </header>
