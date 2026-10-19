@@ -86,7 +86,7 @@ export const SobreMi: React.FC = () => {
                   <span className="text-[10px] font-mono tracking-widest uppercase">Metas y Aspiraciones</span>
                 </div>
                 <p className="text-neutral-300 text-xs sm:text-sm leading-relaxed font-sans">
-                Desarrollarme profesionalmente en el área de análisis y ciencia de datos, fortaleciendo mis conocimientos en SQL, Python, inteligencia artificial y machine learning. Busco participar en proyectos donde pueda aplicar mis habilidades técnicas para analizar datos y generar soluciones que aporten valor a las organizaciones.
+                Desarrollarme profesionalmente en el área de inteligencia artificial y visión por computadora, fortaleciendo mis conocimientos en machine learning, deep learning y Python. Busco participar en proyectos donde pueda diseñar, entrenar e implementar modelos de detección y análisis de imágenes, apoyándome en el análisis de datos y SQL para generar soluciones que aporten valor a las organizaciones.
 
               </p>
               </div>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'motion/react';
-import { Brain } from 'lucide-react';
+import { Brain, Eye } from 'lucide-react';
 
 interface SkillItem {
   name: string;
@@ -8,6 +8,8 @@ interface SkillItem {
   color: string;
   glow: string;
   borderHover: string;
+  // Icono de lucide para herramientas que no existen en Simple Icons
+  Icon?: React.ElementType;
 }
 
 export const Habilidades: React.FC = () => {
@@ -20,52 +22,21 @@ export const Habilidades: React.FC = () => {
       borderHover: 'hover:border-blue-400/50',
     },
 
-    pandas: {
-      name: 'Pandas',
-      slug: 'pandas',
-      color: '#150458',
-      glow: 'rgba(21,4,88,0.35)',
-      borderHover: 'hover:border-purple-400/50',
+    opencv: {
+      name: 'OpenCV',
+      slug: 'opencv',
+      color: '#5C3EE8',
+      glow: 'rgba(92,62,232,0.35)',
+      borderHover: 'hover:border-violet-400/50',
     },
 
-    numpy: {
-      name: 'NumPy',
-      slug: 'numpy',
-      color: '#4D77CF',
-      glow: 'rgba(77,119,207,0.35)',
-      borderHover: 'hover:border-blue-400/50',
-    },
-
-    postgresql: {
-      name: 'PostgreSQL',
-      slug: 'postgresql',
-      color: '#4169E1',
-      glow: 'rgba(65,105,225,0.35)',
-      borderHover: 'hover:border-indigo-400/50',
-    },
-
-    excel: {
-      name: 'Excel',
-      slug: 'microsoftexcel',
-      color: '#217346',
-      glow: 'rgba(33,115,70,0.35)',
-      borderHover: 'hover:border-green-500/50',
-    },
-
-    powerbi: {
-      name: 'Power BI',
-      slug: 'powerbi',
-      color: '#F2C811',
-      glow: 'rgba(242,200,17,0.35)',
-      borderHover: 'hover:border-yellow-400/50',
-    },
-
-    tableau: {
-      name: 'Tableau',
-      slug: 'tableau',
-      color: '#E97627',
-      glow: 'rgba(233,118,39,0.35)',
-      borderHover: 'hover:border-orange-400/50',
+    yolo: {
+      name: 'YOLOv8',
+      slug: '',
+      color: '#38BDF8',
+      glow: 'rgba(56,189,248,0.35)',
+      borderHover: 'hover:border-sky-400/50',
+      Icon: Eye,
     },
 
     roboflow: {
@@ -81,6 +52,38 @@ export const Habilidades: React.FC = () => {
       slug: 'googlecolab',
       color: '#F9AB00',
       glow: 'rgba(249,171,0,0.35)',
+      borderHover: 'hover:border-yellow-400/50',
+    },
+
+    numpy: {
+      name: 'NumPy',
+      slug: 'numpy',
+      color: '#4D77CF',
+      glow: 'rgba(77,119,207,0.35)',
+      borderHover: 'hover:border-blue-400/50',
+    },
+
+    pandas: {
+      name: 'Pandas',
+      slug: 'pandas',
+      color: '#150458',
+      glow: 'rgba(21,4,88,0.35)',
+      borderHover: 'hover:border-purple-400/50',
+    },
+
+    postgresql: {
+      name: 'PostgreSQL',
+      slug: 'postgresql',
+      color: '#4169E1',
+      glow: 'rgba(65,105,225,0.35)',
+      borderHover: 'hover:border-indigo-400/50',
+    },
+
+    powerbi: {
+      name: 'Power BI',
+      slug: 'powerbi',
+      color: '#F2C811',
+      glow: 'rgba(242,200,17,0.35)',
       borderHover: 'hover:border-yellow-400/50',
     },
 
@@ -101,10 +104,11 @@ export const Habilidades: React.FC = () => {
     },
   };
 
+  // Primero IA y visión por computadora, después datos y despliegue
   const rows = [
-    ['python', 'pandas', 'numpy'],
-    ['postgresql', 'excel', 'powerbi'],
-    ['tableau', 'roboflow', 'colab'],
+    ['python', 'opencv', 'yolo'],
+    ['roboflow', 'colab', 'numpy'],
+    ['pandas', 'postgresql', 'powerbi'],
     ['fastapi', 'github'],
   ];
 
@@ -122,7 +126,7 @@ export const Habilidades: React.FC = () => {
         {/* Título */}
         <div className="mb-16 text-center">
           <p className="text-xs font-mono font-medium tracking-widest text-cyan-400 uppercase mb-1">
-            DATA & AI STACK
+            AI & COMPUTER VISION STACK
           </p>
 
           <h2 className="text-3xl sm:text-4xl font-sans font-bold text-white tracking-tight flex items-center justify-center gap-2">
@@ -200,12 +204,19 @@ export const Habilidades: React.FC = () => {
                         relative z-10
                       "
                     >
-                      <img
-                        src={`https://cdn.simpleicons.org/${s.slug}/${s.color.replace('#', '')}`}
-                        alt={s.name}
-                        className="w-6 h-6 sm:w-7 sm:h-7"
-                        loading="lazy"
-                      />
+                      {s.Icon ? (
+                        <s.Icon
+                          className="w-6 h-6 sm:w-7 sm:h-7"
+                          style={{ color: s.color }}
+                        />
+                      ) : (
+                        <img
+                          src={`https://cdn.simpleicons.org/${s.slug}/${s.color.replace('#', '')}`}
+                          alt={s.name}
+                          className="w-6 h-6 sm:w-7 sm:h-7"
+                          loading="lazy"
+                        />
+                      )}
                     </div>
 
                     {/* Nombre */}
