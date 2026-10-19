@@ -25,13 +25,13 @@ export const Proyectos: React.FC = () => {
     {
       id: 1,
       company: 'Cervecería del Pacífico',
-      position: 'Practicante de Análisis de Datos',
-      type: 'Contrato de prácticas',
+      position: 'Desarrollador de Visión por Computadora',
+      type: 'Contrato de práctica',
       period: 'Sept. 2026 - Actualidad',
       location: 'Mazatlán, Sinaloa · Presencial',
 
       description:
-        'Desarrollo de soluciones de análisis de datos e inteligencia artificial aplicadas a procesos industriales.',
+        'Desarrollo de soluciones de automatización con inteligencia artificial aplicadas a procesos industriales.',
 
       activities: [
         'Desarrollo de sistema de visión por computadora para detección de EPP en tiempo real.',
