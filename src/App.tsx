@@ -5,6 +5,7 @@ import { Inicio } from './components/Inicio';
 import { SobreMi } from './components/SobreMi';
 import { Habilidades } from './components/Habilidades';
 import { Proyectos } from './components/Proyectos';
+import { Portafolio } from './components/Portafolio';
 import { Contacto } from './components/Contacto';
 import { stormAudio } from './components/AudioEngine';
 import { CloudLightning, TriangleAlert } from 'lucide-react';
@@ -73,28 +74,47 @@ export default function App() {
         onToggleSound={() => setSoundEnabled(!soundEnabled)}
         onTriggerLightning={triggerManualLightning}
       />
-
+      
       {/* Main Single Page structural blocks */}
       <main className="relative z-20 w-full">
-        
+
         {/* INICIO */}
-        <Inicio
-          onContactClick={handleScrollToContact}
-          onTriggerLightning={triggerManualLightning}
-        />
+        <section id="inicio" className="scroll-mt-28">
+          <Inicio
+            onContactClick={handleScrollToContact}
+            onTriggerLightning={triggerManualLightning}
+          />
+        </section>
 
         {/* SOBRE MI */}
-        <SobreMi />
+        <section id="sobre-mi" className="scroll-mt-28">
+          <SobreMi />
+        </section>
 
-        {/* HABILIDADES */}
-        <Habilidades />
+        {/* HABILIDADES / HERRAMIENTAS */}
+        <section id="habilidades" className="scroll-mt-28">
+          <Habilidades />
+        </section>
 
-        {/* PROYECTOS */}
-        <Proyectos />
+        {/* Experiencia */}
+        <section id="experiencia" className="scroll-mt-28">
+          <Proyectos />
+        </section>
+
+        {/*  - PORTAFOLIO DE TRABAJO */}
+        <section id="proyectos" className="scroll-mt-28">
+          <Portafolio />
+        </section>
+
+        
 
         {/* CONTACTO */}
-        <Contacto />
+        <section id="contacto" className="scroll-mt-28">
+          <Contacto />
+        </section>
+
       </main>
+
 
       {/* Atmospheric Footer floating parameters */}
       <footer className="w-full bg-[#040406] border-t border-neutral-900/60 py-8 relative z-30">
