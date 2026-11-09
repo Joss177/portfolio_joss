@@ -20,6 +20,29 @@ interface PortfolioItem {
 const portfolioItems: PortfolioItem[] = [
   {
     id: 1,
+    title: 'HoloSketch 3D',
+    subtitle: 'Sistema de visión por computadora',
+    description:
+      'Sistema Inteligente de Dibujo y Modelado Tridimensional mediante Reconocimiento de Gestos Manuales y Visión por Computadora en Tiempo Real.',
+    
+    technologies: [
+        'Python',
+        'OpenCV',
+        'MediaPipe',
+        'PyVista',
+        'PyVistaQt',
+        'PySide6',
+        'NumPy',
+        'VTK',
+        'Git',
+        'GitHub',
+    ],
+
+    video: '/videos/HoloSketchDemostracion.mp4',
+  },
+
+  {
+    id: 2,
     title: 'CatMotions',
     subtitle: 'Sistema de visión por computadora',
     description:
