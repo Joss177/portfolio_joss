@@ -40,7 +40,7 @@ const portfolioItems: PortfolioItem[] = [
         'GitHub',
     ],
 
-    video: '/videos/VisonEPP.mp4',
+    video: '/videos/VisionEPP.mp4',
   },
   {
     id: 2,
