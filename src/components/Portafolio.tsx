@@ -18,8 +18,32 @@ interface PortfolioItem {
 }
 
 const portfolioItems: PortfolioItem[] = [
+
   {
     id: 1,
+    title: 'Sistema Inteligente de Detección de EPP',
+    subtitle: 'Inteligencia Artificial y Visión por Computadora',
+    description:
+      'Sistema de monitoreo industrial basado en inteligencia artificial y visión por computadora, desarrollado para detectar en tiempo real incumplimientos en el uso de Equipo de Protección Personal (EPP). Integra YOLO26, cámaras IP y procesamiento de video mediante OpenCV, con validación de detecciones y envío automático de alertas por WhatsApp para fortalecer la seguridad operativa.',
+
+    technologies: [
+        'Python',
+        'YOLO26',
+        'OpenCV',
+        'Roboflow',
+        'FastAPI',
+        'SQLite',
+        'RTSP',
+        'GreenAPI',
+        'Google Colab',
+        'Git',
+        'GitHub',
+    ],
+
+    video: '/videos/VisonEPP.mp4',
+  },
+  {
+    id: 2,
     title: 'HoloSketch 3D',
     subtitle: 'Sistema de visión por computadora',
     description:
@@ -42,7 +66,7 @@ const portfolioItems: PortfolioItem[] = [
   },
 
   {
-    id: 2,
+    id: 3,
     title: 'CatMotions',
     subtitle: 'Sistema de visión por computadora',
     description:
